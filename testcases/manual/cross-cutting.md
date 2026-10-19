@@ -1,0 +1,4 @@
+# Cross-cutting (Manual)
+
+| ID | Title | Priority | Technique | Preconditions | Steps | Expected Result |
+|----|-------|----------|-----------|---------------|-------|-----------------|
