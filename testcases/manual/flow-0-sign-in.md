@@ -2,7 +2,7 @@
 
 ## Assumptions
 
-The case leaves these behaviours unspecified. The test cases below are written against these assumptions;
+The case leaves these behaviours unspecified. The test cases below are written against these assumptions.
 | ID | Ambiguity | Assumption | Affects | Question for PO |
 |----|-----------|------------|---------|-----------------|
 | AS-01 | Step 3 says the backend "will lookup their tenant informations" but not what happens when the username is not found | An unknown username shows an error and the Microsoft login screen is not opened | SI-M-003 | What should the user see for a username that doesn't belong to any Tenant? |
