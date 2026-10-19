@@ -1,4 +1,4 @@
 # Cross-cutting (Automation)
 
-| ID | Title | Priority | Technique | Preconditions | Steps | Expected Result |
+| ID | Title | Priority | Test Type | Preconditions | Steps | Expected Result |
 |----|-------|----------|-----------|---------------|-------|-----------------|
