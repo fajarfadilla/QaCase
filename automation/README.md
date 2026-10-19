@@ -6,10 +6,10 @@ Example automation for WeMine. The test cases these specs implement are document
 
 ## Tools
 
-| Tool | Used for |
-|------|----------|
+| Tool                                                   | Used for                                                         |
+| ------------------------------------------------------ | ---------------------------------------------------------------- |
 | [Playwright Test](https://playwright.dev) (TypeScript) | API specs (`tests/api`) and WeMineOffice web specs (`tests/web`) |
-| [Maestro](https://maestro.mobile.dev) | WeMine mobile flows (`mobile/`) |
+| [Maestro](https://maestro.mobile.dev)                  | WeMine mobile flows (`mobile/`)                                  |
 
 ## Structure
 
@@ -39,33 +39,34 @@ pnpm test:list      # list every spec Playwright discovers
 pnpm test           # run against a real environment (see below)
 ```
 
-| Variable | Default (placeholder) | Meaning |
-|----------|-----------------------|---------|
-| `WEMINE_API_URL` | `https://api.wemine.test` | WeMine backend base URL |
-| `WEMINEOFFICE_URL` | `https://office.wemine.test` | WeMineOffice base URL |
+| Variable           | Default (placeholder)        | Meaning                 |
+| ------------------ | ---------------------------- | ----------------------- |
+| `WEMINE_API_URL`   | `https://api.wemine.test`    | WeMine backend base URL |
+| `WEMINEOFFICE_URL` | `https://office.wemine.test` | WeMineOffice base URL   |
 
 ## Assumed API (AS-46)
 
 The case only names `/user/who`, `/user/me` and `/tenant/master`, without methods, payloads or status codes. Everything below is assumed and should be replaced by the real API specification.
 
-| Method | Path | Request body | Success | Errors |
-|--------|------|--------------|---------|--------|
-| POST | `/user/who` | `{ username }` | 200 `{ tenantId, tenantName }` | 400 empty username, 404 unknown username |
-| GET | `/user/me` | — | 200 `{ id, username, name, tenantId }` | 401 |
-| GET | `/tenant/master` | — | 200 `{ endpoints: [{ name, path }] }` | 401 |
-| GET | `/tenant/master/{name}` | — | 200 list of that Master Data | 401 |
-| POST | `/files` | multipart file | 201 `{ id }` | 400, 401 |
-| POST | `/equipment/forms` | `{ formCode, fields: [{ type, label, mandatory, options? }] }` | 201 `{ id }` | 400 limits, 403 not admin, 409 duplicate Form Code |
-| GET | `/equipment/forms/{id}` | — | 200 Form | 404 |
-| POST | `/equipment/inspections` | `{ clientId, formCode, values }` | 201 `{ id }` | 400 missing mandatory Field |
-| POST | `/safety/hazards` | `{ clientId, locationId, sublocationId, areaId, areaDescription?, evidenceIds, picId }` | 201 `{ id, status: "OPEN", followupTask: { id, picId } }` | 400 missing or mismatched field, 404 PIC not found |
-| GET | `/safety/hazards/{id}` | — | 200 Hazard with its Followup Task | 404 not found or other Tenant |
-| GET | `/safety/followup-tasks` | — | 200 Followup Tasks assigned to the caller | 401 |
-| POST | `/safety/hazards/{id}/followup` | `{ evidenceIds?, resolutionDate, coObserverIds? }` | 200 Hazard with status `RESOLVED` | 400 invalid, 403 not the PIC, 404 other Tenant, 409 already resolved |
+| Method | Path                            | Request body                                                                            | Success                                                                                | Errors                                                               |
+| ------ | ------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| POST   | `/user/who`                     | `{ username }`                                                                          | 200 `{ tenantId, tenantName }`                                                         | 400 empty username, 404 unknown username                             |
+| GET    | `/user/me`                      | —                                                                                       | 200 `{ id, username, name, tenantId }`                                                 | 401                                                                  |
+| GET    | `/tenant/master`                | —                                                                                       | 200 `{ endpoints: [{ name, path }] }`                                                  | 401                                                                  |
+| GET    | `/tenant/master/{name}`         | —                                                                                       | 200 list of that Master Data                                                           | 401                                                                  |
+| POST   | `/files`                        | multipart file                                                                          | 201 `{ id }`                                                                           | 400, 401                                                             |
+| POST   | `/equipment/forms`              | `{ formCode, fields: [{ type, label, mandatory, options? }] }`                          | 201 `{ id }`                                                                           | 400 limits, 403 not admin, 409 duplicate Form Code                   |
+| GET    | `/equipment/forms/{id}`         | —                                                                                       | 200 Form                                                                               | 404                                                                  |
+| POST   | `/equipment/inspections`        | `{ clientId, formCode, values }`                                                        | 201 `{ id }`                                                                           | 400 missing mandatory Field                                          |
+| POST   | `/safety/hazards`               | `{ clientId, locationId, sublocationId, areaId, areaDescription?, evidenceIds, picId }` | 201 `{ id, status: "OPEN", followupTask: { id, picId } }`                              | 400 missing or mismatched field, 404 PIC not found                   |
+| GET    | `/safety/hazards?clientId=`     | —                                                                                       | 200 Hazards the caller reported or is PIC of (AS-22), optionally filtered by client ID | 401                                                                  |
+| GET    | `/safety/hazards/{id}`          | —                                                                                       | 200 Hazard with its Followup Task                                                      | 404 not found or other Tenant                                        |
+| GET    | `/safety/followup-tasks`        | —                                                                                       | 200 Followup Tasks assigned to the caller                                              | 401                                                                  |
+| POST   | `/safety/hazards/{id}/followup` | `{ evidenceIds?, resolutionDate, coObserverIds? }`                                      | 200 Hazard with status `RESOLVED`                                                      | 400 invalid, 403 not the PIC, 404 other Tenant, 409 already resolved |
 
 Test-only endpoints the test environment is assumed to provide:
 
-| Method | Path | Purpose |
-|--------|------|---------|
-| POST | `/test/auth/token` | `{ username }` → `{ accessToken }` for a seeded test account (AS-45) |
-| GET | `/test/notifications?recipient=&since=` | Notifications an Employee received since a time (AS-47) |
+| Method | Path                                    | Purpose                                                              |
+| ------ | --------------------------------------- | -------------------------------------------------------------------- |
+| POST   | `/test/auth/token`                      | `{ username }` → `{ accessToken }` for a seeded test account (AS-45) |
+| GET    | `/test/notifications?recipient=&since=` | Notifications an Employee received since a time (AS-47)              |

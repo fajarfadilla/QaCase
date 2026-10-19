@@ -1,6 +1,7 @@
 /**
  * Seeded test data, matching "Test Data" in testcases/manual/flow-2-hazard-report.md.
  * The IDs are assumed (AS-46); replace them with the real seed IDs of the test environment.
+ * Employees are identified by their username.
  */
 export const users = {
   rina: 'rina', // Reporter; Area Member of Crusher Zone
@@ -30,4 +31,11 @@ export const places = {
   haulRoad: 'area-haul-road',
   bay2: 'area-bay-2',
   rampA: 'area-ramp-a',
+} as const;
+
+/** A Location → Sublocation → Area in Tenant B, for tenant isolation specs. */
+export const tenantBPlaces = {
+  location: 'loc-b-quarry',
+  sublocation: 'subloc-b-pit-a',
+  area: 'area-b-loading-bay',
 } as const;
