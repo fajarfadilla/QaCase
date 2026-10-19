@@ -1,0 +1,45 @@
+# HZ-A-011 Submit a Hazard Report offline, then sync
+#
+# Example only (AS-44). Assumes an Android test build of WeMine (AS-50) that is already
+# signed in as Rina with Master Data downloaded, and the screen labels from AS-49.
+# Run with: maestro test mobile/hazard-offline.yaml
+appId: com.wemine.app
+name: HZ-A-011 Submit a Hazard Report offline, then sync
+tags:
+  - P1
+  - offline
+---
+- addMedia:
+    - ./assets/evidence.png
+- launchApp:
+    clearState: false
+
+# 1. Turn airplane mode on
+- setAirplaneMode: enabled
+- assertVisible: Offline
+
+# 2. Fill and submit a Hazard Report for Crusher Zone
+- tapOn: Hazard
+- tapOn: Report hazard
+- tapOn: Location
+- tapOn: Site North
+- tapOn: Sublocation
+- tapOn: Pit 1
+- tapOn: Area
+- tapOn: Crusher Zone
+- tapOn: Evidence
+- tapOn: Choose from gallery
+- tapOn:
+    id: .*thumbnail.*
+    index: 0
+- tapOn: Submit
+- assertVisible: Pending sync
+
+# 3. Turn airplane mode off
+- setAirplaneMode: disabled
+
+# 4. Wait for sync
+- extendedWaitUntil:
+    notVisible: Pending sync
+    timeout: 60000
+- assertVisible: Open

@@ -19,12 +19,15 @@ automation/
 │   ├── env.ts             ← API and web base URLs
 │   ├── auth.ts            ← token for a test account, skipping Microsoft login (AS-45)
 │   ├── fixtures.ts        ← `apiAs(username)`: an API client signed in as that account
+│   ├── hazards.ts         ← builds and creates Hazards and Followup Tasks for specs
 │   ├── notifications.ts   ← reads who was notified (AS-47)
-│   └── test-data.ts       ← seeded users, Tenants and places
+│   ├── test-data.ts       ← seeded users, Tenants and places
+│   └── web-session.ts     ← signs WeMineOffice in as a test account (AS-45)
+├── pages/                 ← page objects for WeMineOffice (element names assumed, AS-49)
 ├── tests/
 │   ├── api/               ← Playwright API specs
 │   └── web/               ← Playwright WeMineOffice specs
-├── mobile/                ← Maestro flows
+├── mobile/                ← Maestro flows, with `assets/` for media they add to the device
 └── playwright.config.ts   ← projects: `api`, `web`
 ```
 
@@ -37,6 +40,9 @@ pnpm install
 pnpm typecheck      # compile all specs
 pnpm test:list      # list every spec Playwright discovers
 pnpm test           # run against a real environment (see below)
+pnpm format         # format with oxfmt
+
+maestro test mobile/hazard-offline.yaml   # mobile flow, needs an Android test build (AS-50)
 ```
 
 | Variable           | Default (placeholder)        | Meaning                 |
