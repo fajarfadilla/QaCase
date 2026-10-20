@@ -12,7 +12,7 @@ export interface Notification {
 
 /**
  * Reads the notifications an Employee received since a point in time, through the
- * test-only Notification Service endpoint (AS-46).
+ * test-only Notification Service endpoint (AS-37).
  */
 export async function notificationsFor(
   api: APIRequestContext,

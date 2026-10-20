@@ -8,7 +8,7 @@ on:
     paths: ['automation/**', '.github/workflows/automation.yml']
 jobs:
   check:
-    # The specs are examples only (AS-43): there is no WeMine environment to run them against,
+    # The specs are examples only (AS-34): there is no WeMine environment to run them against,
     # so CI checks that they are formatted, compile, and are discovered by Playwright.
     timeout-minutes: 10
     runs-on: ubuntu-latest

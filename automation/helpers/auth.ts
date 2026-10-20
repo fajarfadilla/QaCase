@@ -4,7 +4,7 @@ import type { Username } from './test-data';
 
 /**
  * Gets a token for a test account from the test-only auth endpoint, skipping the
- * Microsoft login screen (AS-44). The real Microsoft login is covered by manual cases.
+ * Microsoft login screen (AS-35). The real Microsoft login is covered by manual cases.
  */
 export async function getToken(username: Username): Promise<string> {
   const api = await request.newContext({ baseURL: env.apiUrl });

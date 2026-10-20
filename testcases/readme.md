@@ -25,23 +25,22 @@ QaCase/
 
 | Area | Manual | Automation | Automated now |
 |------|--------|------------|---------------|
-| [Flow 0 - Sign In](./manual/flow-0-sign-in.md) | 14 | [5](./automation/flow-0-sign-in.md) | 2 |
-| [Flow 1 - Equipment Inspection](./manual/flow-1-equipment-inspection.md) | 24 | [9](./automation/flow-1-equipment-inspection.md) | 1 |
-| [Flow 2 - Safety Hazard Report](./manual/flow-2-hazard-report.md) | 24 | [11](./automation/flow-2-hazard-report.md) | 5 |
-| [System-wide](./manual/system-wide.md) | 19 | [4](./automation/system-wide.md) | 1 |
-| **Total** | **81** | **29** | **9** |
+| [Flow 0 - Sign In](./manual/flow-0-sign-in.md) | 8 | [5](./automation/flow-0-sign-in.md) | 2 |
+| [Flow 1 - Equipment Inspection](./manual/flow-1-equipment-inspection.md) | 10 | [9](./automation/flow-1-equipment-inspection.md) | 1 |
+| [Flow 2 - Safety Hazard Report](./manual/flow-2-hazard-report.md) | 15 | [11](./automation/flow-2-hazard-report.md) | 5 |
+| [System-wide](./manual/system-wide.md) | 9 | [4](./automation/system-wide.md) | 1 |
+| **Total** | **42** | **29** | **9** |
 
 "Automated now" counts automation cases that have an example spec; the rest are marked `Planned`.
 
 ## How to Read the Test Cases
 
-Each case file has up to four sections:
+Each case file has up to three sections:
 
 | Section | What it holds |
 |---------|---------------|
 | **Assumptions** | Where the case is ambiguous: what it says, the assumption the cases are written against, which cases depend on it, and the question for the PO |
 | **Test Data** | The Tenants, people and places the cases use (defined once in Flow 2 and linked from the others) |
-| **Field Coverage** | Flow 2 only: every form field, whether it is mandatory, and which cases check it |
 | **Test Cases** | The cases themselves |
 
 ### Case IDs
@@ -74,7 +73,7 @@ When running manual cases, mark each case **Pass**, **Fail** (note the failing s
 
 ## How to Read the Automation Results
 
-The automation specs are **examples only** (AS-43): there is no WeMine environment, APK or API to run them against. They are written against the API and UI assumed in [automation/README.md](../automation/README.md).
+The automation specs are **examples only** (AS-34): there is no WeMine environment, APK or API to run them against. They are written against the API and UI assumed in [automation/README.md](../automation/README.md).
 
 **CI** ([`.github/workflows/automation.yml`](../.github/workflows/automation.yml)) runs on every change to `automation/`:
 
@@ -112,9 +111,9 @@ Alternatives considered:
 
 ## Open Questions
 
-There are **49 assumptions** (AS-01 – AS-49), each with a question for the PO. They are in the **Assumptions** section of each case file:
+There are **40 assumptions** (AS-01 – AS-40), each with a question for the PO. They are in the **Assumptions** section of each case file:
 
 - Product behaviour: [Flow 0](./manual/flow-0-sign-in.md#assumptions) · [Flow 1](./manual/flow-1-equipment-inspection.md#assumptions) · [Flow 2](./manual/flow-2-hazard-report.md#assumptions) · [System-wide](./manual/system-wide.md#assumptions)
 - Automation constraints: [Flow 0](./automation/flow-0-sign-in.md#assumptions) · [Flow 1](./automation/flow-1-equipment-inspection.md#assumptions) · [Flow 2](./automation/flow-2-hazard-report.md#assumptions) · [System-wide](./automation/system-wide.md#assumptions)
 
-The highest-impact questions are who counts as "people in the area" (AS-22), what happens to offline records whose Master Data changed before sync (AS-35), and which WeMineOffice features must work offline (AS-39).
+The highest-impact questions are who counts as "people in the area" (AS-17), what happens to offline records whose Master Data changed before sync (AS-29), and which WeMineOffice features must work offline (AS-32).

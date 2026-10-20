@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 import { env } from './helpers/env';
 
 /**
- * Example specs only (AS-43): there is no WeMine environment to run them against.
+ * Example specs only (AS-34): there is no WeMine environment to run them against.
  * Point WEMINE_API_URL / WEMINEOFFICE_URL at a real test environment to run them.
  * See https://playwright.dev/docs/test-configuration.
  */
