@@ -1,6 +1,6 @@
 /**
  * Seeded test data, matching "Test Data" in testcases/manual/flow-2-hazard-report.md.
- * The IDs are assumed (AS-46); replace them with the real seed IDs of the test environment.
+ * The IDs are assumed (AS-45); replace them with the real seed IDs of the test environment.
  * Employees are identified by their username.
  */
 export const users = {

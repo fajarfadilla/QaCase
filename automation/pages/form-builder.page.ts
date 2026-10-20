@@ -2,7 +2,7 @@ import type { Locator, Page } from '@playwright/test';
 
 export type FieldType = 'Text' | 'Date Picker' | 'Select' | 'Radio' | 'Image Picker';
 
-/** WeMineOffice Form Builder. Element names are assumed (AS-49). */
+/** WeMineOffice Form Builder. Element names are assumed (AS-48). */
 export class FormBuilderPage {
   readonly formCode: Locator;
   readonly addFieldButton: Locator;

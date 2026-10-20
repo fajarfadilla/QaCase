@@ -2,7 +2,7 @@
 
 Example automation for WeMine. The test cases these specs implement are documented in [testcases/automation](../testcases/automation).
 
-> **Example specs only (AS-44).** There is no WeMine environment, APK or API to run against, so the specs are written against the assumed API and UI below. CI only checks that they compile and are discovered.
+> **Example specs only (AS-43).** There is no WeMine environment, APK or API to run against, so the specs are written against the assumed API and UI below. CI only checks that they compile and are discovered.
 
 ## Tools
 
@@ -17,13 +17,13 @@ Example automation for WeMine. The test cases these specs implement are document
 automation/
 ├── helpers/
 │   ├── env.ts             ← API and web base URLs
-│   ├── auth.ts            ← token for a test account, skipping Microsoft login (AS-45)
+│   ├── auth.ts            ← token for a test account, skipping Microsoft login (AS-44)
 │   ├── fixtures.ts        ← `apiAs(username)`: an API client signed in as that account
 │   ├── hazards.ts         ← builds and creates Hazards and Followup Tasks for specs
-│   ├── notifications.ts   ← reads who was notified (AS-47)
+│   ├── notifications.ts   ← reads who was notified (AS-46)
 │   ├── test-data.ts       ← seeded users, Tenants and places
-│   └── web-session.ts     ← signs WeMineOffice in as a test account (AS-45)
-├── pages/                 ← page objects for WeMineOffice (element names assumed, AS-49)
+│   └── web-session.ts     ← signs WeMineOffice in as a test account (AS-44)
+├── pages/                 ← page objects for WeMineOffice (element names assumed, AS-48)
 ├── tests/
 │   ├── api/               ← Playwright API specs
 │   └── web/               ← Playwright WeMineOffice specs
@@ -42,7 +42,7 @@ pnpm test:list      # list every spec Playwright discovers
 pnpm test           # run against a real environment (see below)
 pnpm format         # format with oxfmt
 
-maestro test mobile/hazard-offline.yaml   # mobile flow, needs an Android test build (AS-50)
+maestro test mobile/hazard-offline.yaml   # mobile flow, needs an Android test build (AS-49)
 ```
 
 | Variable           | Default (placeholder)        | Meaning                 |
@@ -50,7 +50,7 @@ maestro test mobile/hazard-offline.yaml   # mobile flow, needs an Android test b
 | `WEMINE_API_URL`   | `https://api.wemine.test`    | WeMine backend base URL |
 | `WEMINEOFFICE_URL` | `https://office.wemine.test` | WeMineOffice base URL   |
 
-## Assumed API (AS-46)
+## Assumed API (AS-45)
 
 The case only names `/user/who`, `/user/me` and `/tenant/master`, without methods, payloads or status codes. Everything below is assumed and should be replaced by the real API specification.
 
@@ -65,7 +65,7 @@ The case only names `/user/who`, `/user/me` and `/tenant/master`, without method
 | GET    | `/equipment/forms/{id}`         | —                                                                                       | 200 Form                                                                               | 404                                                                  |
 | POST   | `/equipment/inspections`        | `{ clientId, formCode, values }`                                                        | 201 `{ id }`                                                                           | 400 missing mandatory Field                                          |
 | POST   | `/safety/hazards`               | `{ clientId, locationId, sublocationId, areaId, areaDescription?, evidenceIds, picId }` | 201 `{ id, status: "OPEN", followupTask: { id, picId } }`                              | 400 missing or mismatched field, 404 PIC not found                   |
-| GET    | `/safety/hazards?clientId=`     | —                                                                                       | 200 Hazards the caller reported or is PIC of (AS-22), optionally filtered by client ID | 401                                                                  |
+| GET    | `/safety/hazards?clientId=`     | —                                                                                       | 200 Hazards the caller reported or is PIC of (AS-21), optionally filtered by client ID | 401                                                                  |
 | GET    | `/safety/hazards/{id}`          | —                                                                                       | 200 Hazard with its Followup Task                                                      | 404 not found or other Tenant                                        |
 | GET    | `/safety/followup-tasks`        | —                                                                                       | 200 Followup Tasks assigned to the caller                                              | 401                                                                  |
 | POST   | `/safety/hazards/{id}/followup` | `{ evidenceIds?, resolutionDate, coObserverIds? }`                                      | 200 Hazard with status `RESOLVED`                                                      | 400 invalid, 403 not the PIC, 404 other Tenant, 409 already resolved |
@@ -74,5 +74,5 @@ Test-only endpoints the test environment is assumed to provide:
 
 | Method | Path                                    | Purpose                                                              |
 | ------ | --------------------------------------- | -------------------------------------------------------------------- |
-| POST   | `/test/auth/token`                      | `{ username }` → `{ accessToken }` for a seeded test account (AS-45) |
-| GET    | `/test/notifications?recipient=&since=` | Notifications an Employee received since a time (AS-47)              |
+| POST   | `/test/auth/token`                      | `{ username }` → `{ accessToken }` for a seeded test account (AS-44) |
+| GET    | `/test/notifications?recipient=&since=` | Notifications an Employee received since a time (AS-46)              |

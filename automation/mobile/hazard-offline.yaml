@@ -1,7 +1,7 @@
 # HZ-A-011 Submit a Hazard Report offline, then sync
 #
-# Example only (AS-44). Assumes an Android test build of WeMine (AS-50) that is already
-# signed in as Rina with Master Data downloaded, and the screen labels from AS-49.
+# Example only (AS-43). Assumes an Android test build of WeMine (AS-49) that is already
+# signed in as Rina with Master Data downloaded, and the screen labels from AS-48.
 # Run with: maestro test mobile/hazard-offline.yaml
 appId: com.wemine.app
 name: HZ-A-011 Submit a Hazard Report offline, then sync

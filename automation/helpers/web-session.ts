@@ -3,7 +3,7 @@ import { getToken } from './auth';
 import type { Username } from './test-data';
 
 /**
- * Signs WeMineOffice in as a test account without the Microsoft login screen (AS-45),
+ * Signs WeMineOffice in as a test account without the Microsoft login screen (AS-44),
  * by storing a test token before the app loads. Assumes WeMineOffice keeps its session
  * in localStorage under `wemine.session`.
  */

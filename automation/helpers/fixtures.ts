@@ -4,7 +4,7 @@ import { env } from './env';
 import type { Username } from './test-data';
 
 interface Fixtures {
-  /** An API client signed in as the given test account (AS-45). */
+  /** An API client signed in as the given test account (AS-44). */
   apiAs: (username: Username) => Promise<APIRequestContext>;
 }
 
